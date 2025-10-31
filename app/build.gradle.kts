@@ -1,5 +1,4 @@
 import com.android.build.api.dsl.ApplicationExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 
 plugins {
     alias(libs.plugins.android.application)
@@ -8,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.example.login_signup"
-    compileSdk = 34  // Fixed: Use stable version
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.login_signup"
         minSdk = 24
-        targetSdk = 34  // Fixed: Use stable version
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -31,12 +30,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17  // Fixed: Added JavaVersion.
-        targetCompatibility = JavaVersion.VERSION_17  // Fixed: Added JavaVersion.
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
+    kotlin {
+        jvmToolchain(17)
     }
 
     buildFeatures {
@@ -44,7 +43,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.11"  // Add this line
+        kotlinCompilerExtensionVersion = "1.5.11"
     }
 }
 
@@ -57,6 +56,15 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+
+    // Add ConstraintLayout dependency - Choose ONE of these options:
+
+    // Option 1: If using version catalog (recommended)
+    implementation(libs.androidx.constraintlayout)
+
+    // Option 2: If not using version catalog, add directly:
+    // implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha21")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
